@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author QianHuaSheng
  * @version V1.0
@@ -6,10 +9,44 @@
  */
 public class ListTest {
 	public static void main(String[] args) {
-//		List list=new Vector();
-//		ArrayList<Object> objects = new ArrayList<>();
-//		objects.add();
-//		new LinkedList<>();
+		//vector 线程安全
+//		List vector=new Vector();
+//		vector.add("");
+//		vector.get(1);
+//		vector.remove("");
+		List<Object> arrayList = new ArrayList();
+		arrayList.add("12");
+		arrayList.remove(1);
+		arrayList.get(1);
+		arrayList.add(1,12);
+		arrayList.size();
+//		***************************************************************
+//		测试arrayList数组copy(arraylist数组删除的做法) 从下标加一的位置copy起 覆盖原有的 最后一个赋值null(让cg处理)
+//		Integer[] intArrays = new Integer[]{1, 2, 3, 4, 5};
+//		int elementCount = intArrays.length;
+//		int index = 2;
+//		if (index >= elementCount) {
+//			throw new ArrayIndexOutOfBoundsException(index + " >= " +
+//					elementCount);
+//		} else if (index < 0) {
+//			throw new ArrayIndexOutOfBoundsException(index);
+//		}
+//		int j = elementCount - index - 1;
+//		if (j > 0) {
+////			src:源数组；
+////			srcPos:源数组要复制的起始位置；
+////			dest:目的数组；
+////			destPos:目的数组放置的起始位置；
+////			length:复制的长度；
+//			System.arraycopy(intArrays, index + 1, intArrays, index, j);
+//		}
+//		elementCount--;
+//		intArrays[elementCount] = null; /* to let gc do its work */
+//		System.out.println(intArrays[4]);
+//		********************************************************
+//		List<String> linkedList = new LinkedList();
+//		linkedList.add("");
+//		linkedList.get(1);
 //		Iterator iterator = list.iterator();
 //		while (iterator.){
 //
@@ -119,10 +156,10 @@ public class ListTest {
 //			System.out.println(remove.get(i));
 //		}
 		//二分法
-		String[] arrays = {"12", "2","1", "12"};
+//		String[] arrays = {"12", "2","1", "12"};
 //		int i = Arrays.binarySearch(arrays, "12");
-		int i1 = twoSeacher(0, arrays.length, "1", arrays);
-		System.out.println(i1);
+//		int i1 = twoSeacher(0, arrays.length, "1", arrays);
+//		System.out.println(i1);
 //		System.out.println(i);22
 	}
 
@@ -139,22 +176,40 @@ public class ListTest {
 	 */
 	public static int twoSeacher(Integer formIndex, Integer endIndex, String key, String[] arrays) {
 		//把范围缩小一半
-		int range=(formIndex+endIndex)>>1;
+		int range = (formIndex + endIndex) >> 1;
 		//比较在前还是在后 如果相等直接返回下标
 		Comparable array = arrays[range];
 		int i = array.compareTo(key);
 		//在后 递归调用 从开始下标到（结束下标/2）
-		if(i<0){
-			twoSeacher(formIndex,endIndex>>2,key,arrays);
+		if (i < 0) {
+			twoSeacher(formIndex, endIndex >> 2, key, arrays);
 		}
 		//在前递归调用 从（开始下标/2）到 结束下标
-		if(i<0){
-			twoSeacher(formIndex>>2,endIndex,key,arrays);
+		if (i < 0) {
+			twoSeacher(formIndex >> 2, endIndex, key, arrays);
 		}
 		//相等直接返回
-		if(i==0){
-			return  range;
+		if (i == 0) {
+			return range;
 		}
 		return Integer.parseInt(null);
 	}
+
+//	public synchronized void removeElementAt(int index 8) {
+//		modCount++;
+//		if (index >= elementCount 10) {
+//			throw new ArrayIndexOutOfBoundsException(index + " >= " +
+//					elementCount);
+//		}
+//		else if (index < 0) {
+//			throw new ArrayIndexOutOfBoundsException(index);
+//		}
+//		int j = elementCount - index - 1; 10-8-1  1
+//		if (j > 0) {
+//			System.arraycopy(elementData,  index + 1,  elementData, index, j);
+//		}
+//		elementCount--;
+//		elementData[elementCount] = null; /* to let gc do its work */
+//	}
+
 }

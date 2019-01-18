@@ -6,13 +6,13 @@
  */
 public class JvmTest {
 	public static void main(String[] args) {
-		String abc="abc";
-		System.out.println(abc.hashCode());
-		String ab="ab";
-		System.out.println(ab.hashCode());
-		ab="abc";
-		System.out.println(ab.hashCode());
-		System.out.println(ab==abc);
+//		String abc="abc";
+//		System.out.println(abc.hashCode());
+//		String ab="ab";
+//		System.out.println(ab.hashCode());
+//		ab="abc";
+//		System.out.println(ab.hashCode());
+//		System.out.println(ab==abc);
 //		String a="a";
 //		String b="a";
 //		System.out.println(a==b);
@@ -25,6 +25,8 @@ public class JvmTest {
 //		String a = "ab1";
 //		String b = "ab1";
 //		System.out.println(a == b);
+		byte[] bytes = new byte[1024 *1024* 3];
+//		System.gc();
 	}
 
 }
