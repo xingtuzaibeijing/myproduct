@@ -12,8 +12,24 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.4.RELEASE</version>
-        <relativePath />
+        <relativePath/>
     </parent>
+
+    <properties>
+        <mybatis.version>2.0.3</mybatis.version>
+        <alibaba.version>1.1.2</alibaba.version>
+        <jsoup.version>1.11.3</jsoup.version>
+        <shardingjdbc.version>2.0.0.M3</shardingjdbc.version>
+        <httpclient.version>4.5.2</httpclient.version>
+        <fastjson.version>1.2.54</fastjson.version>
+        <lombok.version>1.18.4</lombok.version>
+        <tkmybatis.version>4.0.3</tkmybatis.version>
+        <project.name>my-product</project.name>
+        <project.version>1.0.0</project.version>
+        <project.basedir>E:/work/myproduct</project.basedir>
+        <project.build.directory></project.build.directory>
+        <project.build.finalName></project.build.finalName>
+    </properties>
 
 
     <dependencies>
@@ -49,47 +65,76 @@
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper</artifactId>
-            <version>4.0.3</version>
+            <version>${tkmybatis.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/tk.mybatis/mapper-spring-boot-starter -->
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
-            <version>2.0.3</version>
+            <version>${mybatis.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.1.2</version>
+            <version>${alibaba.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.shardingjdbc</groupId>
             <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-            <version>2.0.0.M3</version>
+            <version>${shardingjdbc.version}</version>
         </dependency>
 
         <dependency>
-            <!-- jsoup HTML parser library @ https://jsoup.org/ -->
+            <!-- 用于解析html 用于趴数据 -->
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.11.3</version>
+            <version>${jsoup.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.2</version>
+            <version>${httpclient.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.54</version>
+            <version>${fastjson.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <imageName>192.168.0.11:5000/myproduct-0.0.1</imageName>
+                    <imageTags>
+                        <imageTag>1.0.1</imageTag>
+                    </imageTags>
+                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    <skipDockerBuild>false</skipDockerBuild>
+                    <resources>
+                        <resource>
+                            <directory>${project.basedir}/target</directory>
+                            <include>dome-0.0.1.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

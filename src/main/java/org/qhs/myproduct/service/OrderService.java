@@ -13,4 +13,8 @@ public interface OrderService {
 
 	@Transactional
 	void testTransactional() throws ServiceException;
+
+	default String myOldName(){
+		return "chao";
+	}
 }
